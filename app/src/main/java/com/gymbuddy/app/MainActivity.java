@@ -36,10 +36,10 @@ public class MainActivity extends Activity {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_launcher)
-                        .setContentTitle("My notification")
-                        .setContentText("Hello World!");
+                        .setContentTitle("GymBuddy")
+                        .setContentText("Log Workout");
 // Creates an explicit intent for an Activity in your app
-    //    Intent resultIntent = new Intent(this, ResultActivity.class);
+        Intent resultIntent = new Intent(this, MainActivity.class);
 
 // The stack builder object will contain an artificial back stack for the
 // started Activity.
@@ -47,9 +47,9 @@ public class MainActivity extends Activity {
 // your application to the Home screen.
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 // Adds the back stack for the Intent (but not the Intent itself)
-        //stackBuilder.addParentStack(ResultActivity.class);
+        stackBuilder.addParentStack(MainActivity.class);
 // Adds the Intent that starts the Activity to the top of the stack
-    //    stackBuilder.addNextIntent(resultIntent);
+        stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent =
                 stackBuilder.getPendingIntent(
                         0,
