@@ -3,11 +3,15 @@ package com.gymbuddy.app;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preview.support.v4.app.NotificationManagerCompat;
+import android.preview.support.wearable.notifications.RemoteInput;
+import android.preview.support.wearable.notifications.WearableNotifications;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.view.LayoutInflater;
@@ -61,6 +65,15 @@ public class MainActivity extends Activity {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 // mId allows you to update the notification later on.
         mNotificationManager.notify(1, mBuilder.build());
+        // Creo il remote input
+        String EXTRA_VOICE_REPLY = "extra_voice_reply";
+        RemoteInput remoteInput = new RemoteInput.Builder(EXTRA_VOICE_REPLY).setLabel("Reply").build();
+
+        // Creo la notifica compact
+        Notification replyNotification = new WearableNotifications.Builder(mBuilder).addRemoteInputForContentIntent(remoteInput).build();
+
+        // Passo la notifica appena creata al notification manager compat
+        NotificationManagerCompat.from(this).notify(0, replyNotification);
     }
 
 
